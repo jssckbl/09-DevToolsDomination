@@ -6,6 +6,7 @@
 </head>
 <body>
 
+  <!-- in developer tools, break on, attribute modification -->
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
   <script>
@@ -18,28 +19,72 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('hello I am a %s string!', ':silly:')
+    // ES6 backticks allow the following interpolation
+    // console.log(`hello I am a ${var}`);
 
-    // Styled
+    // Styled (modifying our text using %c and some CSS)
+    console.log('%c I am some fantastic text', 'font-size: 50px; background: red; text-shadow: 10px 10px 0 blue')
 
     // warning!
+    console.warn('oh geez check this warning out please')
 
     // Error :|
+    console.error('oh crap this is a definite error')
 
-    // Info
+    // Info (should be consoling with a blue triangle with exclamation point but is not)
+    console.info('porcupines will lick salt off of the roads');
 
-    // Testing
+    // Testing (you can test for something and if it is false, you will see the error in your console)
+    // if true, nothing will show up in the console
+    console.assert(1 === 1, 'that is wrong') // this will not console because it is true
+    console.assert(1 === 2, 'THAT is wrong') // this will console because it is a false claim
 
-    // clearing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'now that is certainly wrong');
+
+    // clearing (this will clear your console)
+    console.clear();
 
     // Viewing DOM Elements
+    console.log(p) // shows you the actual element itself
+    console.dir(p) // gives you a dropdown, see the classList, methods (in prototype)
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`);  // can also use console.groupCollapsed so console doesn't auto fill with too much info
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age *7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    })
 
-    // counting
+    // counting (will count how many times you use a specific word, number, object, etc)
+    console.count('jess');
+    console.count('jess');
+    console.count('jess');
+    console.count('burt');
+    console.count('burt');
+    console.count('jess');
+    console.count('burt');
+    console.count('jess');
+    console.count('burt');
 
-    // timing
+
+    // timing (to see how long something takes)
+    // similar to performance.now in the browser
+    console.time('fetching data');
+    fetch('https://api.github.com/users/jssckbl')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data)
+      })
+
+    // table (take an array of objects and console in a table)
+    console.table(dogs);
 
   </script>
 </body>
